@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__) . "/cabecera.php");
+include_once(dirname(__FILE__) . "/../../cabecera.php");
 
 //controlador
 //dibuja la plantilla de la vista
@@ -18,6 +18,7 @@ function cabecera() {}
 function cuerpo(){
 ?>
     <br><br>
-    <a href="./aplicacion/pruebas/index.php">Acceso a pruebas</a>
+    Estamos en pruebas
+    <a href="basicas.php">Funcionamiento básico</a>
 <?php
 }

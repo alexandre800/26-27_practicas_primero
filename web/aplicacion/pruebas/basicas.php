@@ -1,12 +1,12 @@
 <?php
-include_once(dirname(__FILE__) . "/cabecera.php");
+include_once(dirname(__FILE__) . "/../../cabecera.php");
 
 //controlador
 //dibuja la plantilla de la vista
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
 cabecera();
 finCabecera();
-inicioCuerpo("2DAW APLICACION");
+inicioCuerpo("prubas básicas");
 cuerpo(); //llamo a la vista
 finCuerpo();
 
@@ -18,6 +18,14 @@ function cabecera() {}
 function cuerpo(){
 ?>
     <br><br>
-    <a href="./aplicacion/pruebas/index.php">Acceso a pruebas</a>
+    Elemento de pruebas
+    <a href="index.php">inicio</a>
+
+    <?php 
+    
+        echo "cadena";
+
+    ?>
+
 <?php
 }
