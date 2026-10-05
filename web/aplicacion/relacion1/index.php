@@ -28,6 +28,9 @@ function cuerpo(){
         <a href="ejercicio2.php">Ejercicio 2</a>
         <a href="ejercicio3.php">Ejercicio 3</a>
         <a href="ejercicio4.php">Ejercicio 4</a>
+        <a href="ejercicio5.php">Ejercicio 5</a>
+        <a href="ejercicio6.php">Ejercicio 6</a>
+        <a href="ejercicio7.php">Ejercicio 7</a>
     <?php
 
 }
