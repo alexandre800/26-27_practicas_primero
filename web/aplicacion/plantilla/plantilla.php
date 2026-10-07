@@ -5,7 +5,7 @@ function paginaError($mensaje)
     header("HTTP/1.0 404 $mensaje");
     inicioCabecera("PRACTICA");
     finCabecera();
-   // inicioCuerpo("ERROR", $ubicacion);
+    // inicioCuerpo("ERROR", $ubicacion);
     echo "<br />\n";
     echo $mensaje;
     echo "<br />\n";
@@ -66,14 +66,6 @@ function inicioCuerpo($cabecera, array $ubicacion)
             <div id="barraLogin">
 
             </div>
-            <div id="barraMenu">
-                <ul>
-                    <li><a href="/index.php">Inicio</a></li>
-                    <li><a href="/aplicacion/pruebas/basicas.php">Básicas</a></li>
-                    <li><a href="/aplicacion/relacion1/index.php">Relación 1</a></li>
-                </ul>
-
-            </div>
 
             <div id="barraUbicacion">
                 <?php
@@ -88,16 +80,28 @@ function inicioCuerpo($cabecera, array $ubicacion)
                 // }
 
                 foreach ($ubicacion as $elemento) {
+
+                    echo "&nbsp;&nbsp;>&nbsp;&nbsp;";
                     if (isset($elemento["ENLACE"]))
                         echo "<a href='{$elemento["ENLACE"]}' >";
-                    
-                    echo $elemento["TEXTO"] . "&nbsp;&nbsp;";
-                    if(isset($elemento["ENLACE"]))
+
+                    echo $elemento["TEXTO"];
+                    if (isset($elemento["ENLACE"]))
                         echo "</a>";
                 }
 
                 ?>
             </div>
+
+            <!-- <div id="barraMenu">
+                <ul>
+                    <li><a href="/index.php">Inicio</a></li>
+                    <li><a href="/aplicacion/pruebas/index.php">Pruebas</a></li>
+                    <li><a href="/aplicacion/relacion1/index.php">Relación 1</a></li>
+                </ul>
+
+            </div> -->
+
         <?php
     }
 
@@ -110,7 +114,7 @@ function inicioCuerpo($cabecera, array $ubicacion)
         <footer>
             <hr width="90%" />
             <div>
-                &copy; Copyright by Profesor
+                &copy; Copyright by Alexandre López
             </div>
         </footer>
         </div>

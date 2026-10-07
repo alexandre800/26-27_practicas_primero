@@ -4,7 +4,8 @@ include_once(dirname(__FILE__) . "/../../cabecera.php");
 //controlador
 $barra=[
     ["TEXTO" => "inicio", "ENLACE" => "../../index.php"],
-    ["TEXTO" => "relación 1", "ENLACE" => "index.php"]
+    ["TEXTO" => "Relación 1", "ENLACE" => "index.php"],
+    ["TEXTO" => "ejercicio 2", "ENLACE" => "ejercicio1.php"]
 ];
 //datos basicos
 
@@ -49,7 +50,7 @@ function cuerpo(){
         .$numero_octal.", número hexadecimal: ". dechex($numero_hexadecimal)."<br>";
     echo "Los mismos números en orden, expresados en decimal: Número binario: "
         . base_convert($numero_binario, 2, 10).", número octal: ".base_convert($numero_octal, 8, 10).
-        ", número hexadecimal: ". $numero_hexadecimal."<br>";//se transforma a hexadecimal directamente
+        ", número hexadecimal: ". $numero_hexadecimal."<br>";//se transforma a decimal directamente
 
 }
 

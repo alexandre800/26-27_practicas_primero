@@ -3,7 +3,8 @@ include_once(dirname(__FILE__) . "/../../cabecera.php");
 
 $barra=[
     ["TEXTO" => "inicio", "ENLACE" => "../../index.php"],
-    ["TEXTO" => "relación 1", "ENLACE" => "index.php"]
+    ["TEXTO" => "Relación 1", "ENLACE" => "index.php"],
+    ["TEXTO" => "ejercicio 6", "ENLACE" => "ejercicio6.php"]
 ];
 
 //controlador
@@ -27,16 +28,16 @@ function cuerpo($array)
 
     //Recorrer el array usando funciones de recorrido
     reset($array); //Coloca el puntero en el primer elemento del array
-    while ($valor = current($array)) {
-        echo key($array) . " => " . $valor . ",  ";
-        next($array);
+    while ($valor = current($array)) { //current()=elemento del puntero
+        echo key($array) . " => " . $valor . ",  ";//key()=clave
+        next($array);//next()=salta al siguiente elemento
     }
 
     echo "<br>";
 
     //recorrer el array_keys y array_values
-    $indices = array_keys($array);
-    $valores = array_values($array);
+    $indices = array_keys($array);//saca todas las claves a un array
+    $valores = array_values($array);//saca todos los valores a un array
 
     for ($i = 0; $i < count($indices); $i++) {
         echo $indices[$i] . " => ".$valores[$i].",  ";

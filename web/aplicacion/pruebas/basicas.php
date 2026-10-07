@@ -1,12 +1,18 @@
 <?php
 include_once(dirname(__FILE__) . "/../../cabecera.php");
 
+$barra=[
+    ["TEXTO" => "inicio", "ENLACE" => "../../index.php"],
+    ["TEXTO" => "pruebas", "ENLACE" => "index.php"],
+    ["TEXTO" => "basicas", "ENLACE" => "basicas.php"]
+];
+
 //controlador
 //dibuja la plantilla de la vista
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
 cabecera();
 finCabecera();
-//inicioCuerpo("prubas básicas");
+inicioCuerpo("prubas básicas", $barra);
 cuerpo(); //llamo a la vista
 finCuerpo();
 

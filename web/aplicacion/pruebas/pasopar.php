@@ -1,6 +1,12 @@
 <?php
 include_once(dirname(__FILE__) . "/../../cabecera.php");
 
+$barra=[
+    ["TEXTO" => "inicio", "ENLACE" => "../../index.php"],
+    ["TEXTO" => "pruebas", "ENLACE" => "index.php"],
+    ["TEXTO" => "paso parametros", "ENLACE" => "pasopar.php"]
+];
+
 //controlador
 
 //datos basicos
@@ -19,7 +25,7 @@ $otras = rellenarOtras();
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
 cabecera();
 finCabecera();
-//inicioCuerpo("paso parametros");
+inicioCuerpo("paso parametros", $barra);
 cuerpo($basicos, $otras); //llamo a la vista
 finCuerpo();
 

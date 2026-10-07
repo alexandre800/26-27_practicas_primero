@@ -1,12 +1,18 @@
 <?php
+
+use function PHPSTORM_META\elementType;
+
 include_once(dirname(__FILE__) . "/../../cabecera.php");
 
-$barra = [
+$barra=[
     ["TEXTO" => "inicio", "ENLACE" => "../../index.php"],
-    ["TEXTO" => "relación 1", "ENLACE" => "index.php"]
+    ["TEXTO" => "Relación 1", "ENLACE" => "index.php"],
+    ["TEXTO" => "ejercicio 5", "ENLACE" => "ejercicio5.php"]
 ];
 
 //controlador
+
+//relleno el array
 $vector = array();
 $vector[1] = "esto es una cadena";
 $vector["posi1"] = 25.67;
@@ -36,7 +42,8 @@ function cuerpo($array)
         echo "Posición ".$i.", contenido (".$tipo."): ";
         $contenido=0;
 
-        switch ($tipo) {
+        //según el tipo del elemento del puntero en el array, cambia la forma en que se muestra en la vista
+        switch ($tipo) { 
             case "array":
                 $contenido="(";
                 foreach ($valor as $subvalor) {
@@ -49,7 +56,7 @@ function cuerpo($array)
                 $contenido = "Entero con valor {$valor}, en binario ".base_convert($valor, 10, 2);
                 break;
 
-            case "float":
+            case "double":
                 $contenido = "Real {$valor}, que al cuadrado es: ".pow($valor, 2);
                 break;
 
@@ -58,9 +65,12 @@ function cuerpo($array)
                 break;
 
             case "boolean":
-                $contenido = "{$valor} y su opuesto ".!$valor;
+                if($valor)
+                    $contenido = "true y su opuesto false";
+                else
+                    $contenido = "false y su opuesto true";
                 break;
         }
-        echo "<br>";
+        echo $contenido."<br>";
     }
 }

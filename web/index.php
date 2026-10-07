@@ -2,7 +2,7 @@
 include_once(dirname(__FILE__) . "/cabecera.php");
 
 //controlador
-$barra=[
+$barra = [
     ["TEXTO" => "inicio", "ENLACE" => "/index.php"]
 ];
 
@@ -16,16 +16,20 @@ finCuerpo();
 
 // **********************************************************
 //vista
-function cabecera() {
-    
-}
+function cabecera() {}
 
 //vista
-function cuerpo(){
+function cuerpo()
+{
 ?>
     <br><br>
-    <a href="./aplicacion/pruebas/index.php">Acceso a pruebas</a>
-    <a href="./aplicacion/pruebas/pasopar.php">paso parametros</a>
-    <a href="./aplicacion/pruebas/array.php">prueba arrays</a>
+    <div id="barraMenu">
+        <ul>
+            <!-- <li><a href="/index.php">Inicio</a></li> -->
+            <li><a href="/aplicacion/pruebas/index.php">Pruebas</a></li>
+            <li><a href="/aplicacion/relacion1/index.php">Relación 1</a></li>
+        </ul>
+
+    </div>
 <?php
 }

@@ -3,6 +3,7 @@ include_once(dirname(__FILE__) . "/../../cabecera.php");
 
 $barra=[
     ["TEXTO" => "inicio", "ENLACE" => "../../index.php"],
+    ["TEXTO" => "pruebas", "ENLACE" => "index.php"]
 ];
 
 //controlador
@@ -24,5 +25,7 @@ function cuerpo(){
     <br><br>
     Estamos en pruebas
     <a href="basicas.php">Funcionamiento básico</a>
+    <a href="array.php">array</a>
+    <a href="pasopar.php">paso parámetros</a>
 <?php
 }

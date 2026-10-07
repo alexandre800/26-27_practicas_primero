@@ -3,7 +3,8 @@ include_once(dirname(__FILE__) . "/../../cabecera.php");
 
 $barra=[
     ["TEXTO" => "inicio", "ENLACE" => "../../index.php"],
-    ["TEXTO" => "relación 1", "ENLACE" => "index.php"]
+    ["TEXTO" => "Relación 1", "ENLACE" => "index.php"],
+    ["TEXTO" => "ejercicio 3", "ENLACE" => "ejercicio3.php"]
 ];
 //controlador
 

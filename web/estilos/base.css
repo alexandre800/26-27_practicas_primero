@@ -7,8 +7,9 @@ body {
 
 #documento{
     margin: 0 auto;
-    background-color: #8080ff;
-    width: 700px;
+    background-color: #dabe36;
+    width: 40%;
+    padding: 20px;
 }
 #cabecera{
     background-color: #14e737;
@@ -25,8 +26,14 @@ body {
 }
 
 #barraUbicacion{
-    background-color: #14e737;
+    background-color: white;
     color: black;
+    border-radius: 20px;
+    margin-bottom: 5%;
+}
+#barraUbicacion a{
+    text-decoration: none;
+    color: blue;
 }
 
 .boton{
@@ -72,9 +79,9 @@ body {
     
 }
 
-.tabla tr.impar{
+/* .tabla tr.impar{
     
-}
+} */
 
 #pie{
     background-color: #81e714;

@@ -3,9 +3,9 @@ include_once(dirname(__FILE__) . "/../../cabecera.php");
 
 $barra=[
     ["TEXTO" => "inicio", "ENLACE" => "../../index.php"],
-    ["TEXTO" => "relación 1", "ENLACE" => "index.php"]
+    ["TEXTO" => "Relación 1", "ENLACE" => "index.php"],
+    ["TEXTO" => "ejercicio 7", "ENLACE" => "ejercicio7.php"]
 ];
-
 //controlador
 
 //dibuja la plantilla de la vista
@@ -39,7 +39,7 @@ function cuerpo()
 
     //fecha actual menos 12 días y 4 horas
     $fecha3 = time();
-    $fecha3-=60*60*24*12; //resto a la fecha 12 dias
+    $fecha3-=60*60*24*12; //resto a la fecha 12 dias (la operación calcula 12 días en segundos)
     $fecha3-=60*60*4; //resto a la fecha 4 horas
     echo "Fecha actual-12d, 4 horas (d/m/Y): " . date('d/m/Y', $fecha3). "<br>";
     echo "Fecha actual-12d, 4 horas (dia, mes, año, dia de la semana): " . date("j, F Y, l", $fecha3) . "<br>";
