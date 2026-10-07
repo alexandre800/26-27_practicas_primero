@@ -1,6 +1,10 @@
 <?php
 include_once(dirname(__FILE__) . "/../../cabecera.php");
 
+$barra=[
+    ["TEXTO" => "inicio", "ENLACE" => "../../index.php"],
+    ["TEXTO" => "relación 1", "ENLACE" => "index.php"]
+];
 //controlador
 
 //primer array creado en varias líneas
@@ -24,7 +28,7 @@ $array3 = [1 => "a", 16 => "e", 54 => "o", 34, "uno" => "cadena", "dos" => true,
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
 cabecera();
 finCabecera();
-inicioCuerpo("Ejercicio 3");
+inicioCuerpo("Ejercicio 3", $barra);
 cuerpo($array1, $array2, $array3); //llamo a la vista
 finCuerpo();
 

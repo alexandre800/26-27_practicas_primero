@@ -19,7 +19,7 @@ $otras = rellenarOtras();
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
 cabecera();
 finCabecera();
-inicioCuerpo("paso parametros");
+//inicioCuerpo("paso parametros");
 cuerpo($basicos, $otras); //llamo a la vista
 finCuerpo();
 

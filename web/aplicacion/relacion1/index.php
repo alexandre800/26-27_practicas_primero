@@ -2,15 +2,16 @@
 include_once(dirname(__FILE__) . "/../../cabecera.php");
 
 //controlador
-
-//datos basicos
+$barra=[
+    ["TEXTO" => "inicio", "ENLACE" => "../../index.php"]
+];
 
 
 //dibuja la plantilla de la vista
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
 cabecera();
 finCabecera();
-inicioCuerpo("Relación 1");
+inicioCuerpo("Relación 1", $barra);
 cuerpo(); //llamo a la vista
 finCuerpo();
 

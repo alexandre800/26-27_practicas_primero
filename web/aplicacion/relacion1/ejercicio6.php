@@ -1,6 +1,11 @@
 <?php
 include_once(dirname(__FILE__) . "/../../cabecera.php");
 
+$barra=[
+    ["TEXTO" => "inicio", "ENLACE" => "../../index.php"],
+    ["TEXTO" => "relación 1", "ENLACE" => "index.php"]
+];
+
 //controlador
 $vector = array("primera" => 12.56, 24 => true, 67 => 23.76);
 
@@ -8,7 +13,7 @@ $vector = array("primera" => 12.56, 24 => true, 67 => 23.76);
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
 cabecera();
 finCabecera();
-inicioCuerpo("Ejercicio 6");
+inicioCuerpo("Ejercicio 6", $barra);
 cuerpo($vector); //llamo a la vista
 finCuerpo();
 

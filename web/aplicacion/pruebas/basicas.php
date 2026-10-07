@@ -6,7 +6,7 @@ include_once(dirname(__FILE__) . "/../../cabecera.php");
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
 cabecera();
 finCabecera();
-inicioCuerpo("prubas básicas");
+//inicioCuerpo("prubas básicas");
 cuerpo(); //llamo a la vista
 finCuerpo();
 

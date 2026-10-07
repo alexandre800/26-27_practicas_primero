@@ -2,7 +2,10 @@
 include_once(dirname(__FILE__) . "/../../cabecera.php");
 
 //controlador
-
+$barra=[
+    ["TEXTO" => "inicio", "ENLACE" => "../../index.php"],
+    ["TEXTO" => "relación 1", "ENLACE" => "index.php"]
+];
 //datos basicos
 
 
@@ -10,7 +13,7 @@ include_once(dirname(__FILE__) . "/../../cabecera.php");
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
 cabecera();
 finCabecera();
-inicioCuerpo("Ejercicio 1");
+inicioCuerpo("Ejercicio 1", $barra);
 cuerpo(); //llamo a la vista
 finCuerpo();
 
