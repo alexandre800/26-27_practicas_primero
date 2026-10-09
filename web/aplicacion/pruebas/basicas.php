@@ -102,6 +102,24 @@ function cuerpo(){
             case 2: $cadena="dos";break;
             default: $cadena="otro";
         }
+
+        echo "FECHAS";
+
+        //Creación con date
+        $cadena = date("d/m/Y H:i:s");
+        echo $cadena;
+        
+        //con datetime
+        $hoy = new DateTime();
+        $cadena = $hoy->format("d/m/Y H:i:s");//con la flecha se llama a los metodos de objeto
+        echo $cadena;
+
+        $hoy->add(new DateInterval("P2DT15H30M"));
+        $cadena = $hoy->format("d/m/Y H:i:s");
+        echo $cadena;
+
+        //DateTime::createFromFormat asi se llama a los metodos estaticos
+
 ?>
 
 <?php
