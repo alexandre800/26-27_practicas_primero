@@ -20,6 +20,8 @@ for ($i = 1; $i <= FILAS; $i++) {
     }
 }
 
+//se puede hacer también con un array de dos dimensiones, una para filas y otra para columnas
+
 //dibuja la plantilla de la vista
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
 cabecera();

@@ -27,5 +27,6 @@ function cuerpo(){
     <a href="basicas.php">Funcionamiento básico</a>
     <a href="array.php">array</a>
     <a href="pasopar.php">paso parámetros</a>
+    <a href="cadenas.php">cadenas</a>
 <?php
 }
