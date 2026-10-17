@@ -11,12 +11,12 @@ $barra=[
 
 //caracteres válidos (números , y letras mayúsculas y minúsculas)
 const CARACTERES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-$array = mb_str_split(CARACTERES);//pasar la cadena a un array (una posicion=un caracter)
+//$array = mb_str_split(CARACTERES);
 
 $cadena="";
 while(mb_strlen($cadena)<20) {//cadena de 20 caracteres
     //coge el caracter de una posición aleatoria del array
-    $cadena .= $array[mt_rand(0, mb_strlen(CARACTERES)-1)];
+    $cadena .= CARACTERES[mt_rand(0, mb_strlen(CARACTERES)-1)];
 }
 
 $cadena2="";
