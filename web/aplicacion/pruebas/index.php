@@ -28,5 +28,7 @@ function cuerpo(){
     <a href="array.php">array</a>
     <a href="pasopar.php">paso parámetros</a>
     <a href="cadenas.php">cadenas</a>
+    <a href="expresiones_regulares.php">expresiones regulares</a>
+    <a href="index_funciones.php">funciones</a>
 <?php
 }
