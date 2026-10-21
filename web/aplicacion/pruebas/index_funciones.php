@@ -20,14 +20,46 @@ $numero=doble(10);
 if(!$numero=doble($numero))
     exit;
 
-//datos basicos
+$numero2=variosParametros(25, "2aaa", 56);
+
+$numero2=variosParametros(25, par3:100);//valor por defecto en par2
+
+$r=[3,4,5,6,76,7];
+$numero2=suma1(1,2,...$r);
+
+$n1=15;
+$otra="n1";
+//Variable - variable
+$numero=$$otra;// $numero=15, hace una referencia a la variable n1 usando el nombre
+
+//variable funcion
+$otra="suma1";
+$numero=$otra(1,2,...$r);
+
+//funciones anónimas
+$func = function (float $a, float $b, float ...$resto): float
+{
+
+   $res = $a + $b;
+   // for ($i = 0; $i < func_num_args(); $i++) {
+
+   foreach ($resto as $num)
+      $res += $num;
+
+   return $res;
+};
+$numero=$func(1,2,3,4);
+
+//función flecha
+$s=fn(int $a, int $b) => $a+$b;
+$numero=$s(29,30);
 
 //dibuja la plantilla de la vista
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
 cabecera();
 finCabecera();
 inicioCuerpo("funciones", $barra);
-cuerpo($numero); //llamo a la vista
+cuerpo($numero, $numero2); //llamo a la vista
 finCuerpo();
 
 // **********************************************************
@@ -35,7 +67,7 @@ finCuerpo();
 function cabecera() {}
 
 //vista
-function cuerpo($numero){
+function cuerpo($numero, $numero2){
 ?>
     <br><br>
     Elemento de pruebas
@@ -43,7 +75,8 @@ function cuerpo($numero){
 
     <?php 
     
-    echo "el doble del número es ".$numero;       
+    echo "el doble del número es ".$numero;
+    echo "<br>Número 2: ".$numero2;   
 
 ?>
 

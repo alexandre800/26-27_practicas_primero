@@ -41,8 +41,8 @@ function cuerpo($cadena)
 
     }
 
-    //cadena a la inversa
-    for($i=mb_strlen($cadena); $i>=0; $i--){
+    //cadena a la inversa (también se puede hacer con índices negativos, ver correccion)
+    for($i=mb_strlen($cadena); $i>=0; $i--){ 
 
         for($i2=mb_strlen($cadena); $i2>=$i; $i2--){
         // for($i2=0; $i2<=$i; $i2++){
@@ -57,6 +57,9 @@ function cuerpo($cadena)
 
     //cadena en partes usando el carácter a
     $cadenaDividida = mb_split("a", $cadena);
+    //$cadenaDividida = explode("a", $cadena);
+    //$cadenaDividida = preg_split("/a/", $cadena); (expresión regular)
+
     foreach ($cadenaDividida as $elem) {
         echo $elem."<br>";
     }

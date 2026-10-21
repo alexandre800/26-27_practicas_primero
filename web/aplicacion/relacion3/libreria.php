@@ -45,3 +45,38 @@ function generarCadena(int $num = 10): string | false
 
     return $cadena;
 }
+
+function operaciones(int $op, float $num1, float ...$numeros): float | false
+{
+
+    $res=0;
+    if($op===1){
+        $res=$num1;
+        foreach($numeros as $num){
+            $res+=$num;
+        }
+    }else if($op===2){
+        $res=$num1;
+        foreach($numeros as $num){
+            $res-=$num;
+        }
+    }else if($op===3){
+        $res=$num1;
+        foreach($numeros as $num){
+            $res*=$num;
+        }
+    }else{
+        $pares=0;
+        $impares=$num1;
+        for($i=0; $i<count($numeros); $i++){
+            if($i%2==0)
+                $pares+=$numeros[$i];
+            else
+                $impares+=$numeros[$i];
+        }
+        $res=$pares-$impares;
+    }
+
+    return $res;
+
+}

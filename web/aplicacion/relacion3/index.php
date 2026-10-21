@@ -61,4 +61,11 @@ function cuerpo()
     $cadena=generarCadena(-2);
     echo "Genero una cadena con -2 caracteres: ".($cadena ? $cadena : "no se puede generar una cadena negativa")."<br>";
 
+
+    echo "<br><h1>Ejercicio 3</h1>";
+    echo "Operaciones (1, 2, 5): ".operaciones(1,2,5)."<br>";
+    echo "Operaciones (2, 4, 5, 6, 7): ".operaciones(2, 4, 5, 6, 7)."<br>";
+    echo "Operaciones (3, 4, 5, 9): ".operaciones(3, 4, 5, 9)."<br>";
+    echo "Operaciones (23, 4, 5, 3, 8, 1, 3, 7, 2): ".operaciones(23, 4, 5, 3, 8, 1, 3, 7, 2)."<br>";
+
 }
