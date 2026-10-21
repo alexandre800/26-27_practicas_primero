@@ -46,28 +46,38 @@ function generarCadena(int $num = 10): string | false
     return $cadena;
 }
 
-function operaciones(int $op, float $num1, float ...$numeros): float | false
+/**
+ * Función a la que le llega un entero con el tipo de operación, un operando, y uno o varios operandos más
+ * Según la operación indicada, se suman, restan o multiplican los operandos, o a los operandos en posiciones
+ * pares se le restan los impares
+ *
+ * @param integer $op
+ * @param float $num1
+ * @param float ...$numeros
+ * @return float
+ */
+function operaciones(int $op, float $num1, float ...$numeros): float
 {
 
     $res=0;
-    if($op===1){
+    if($op===1){//se suman si $op==1
         $res=$num1;
         foreach($numeros as $num){
             $res+=$num;
         }
-    }else if($op===2){
+    }else if($op===2){//se restan si $op==2
         $res=$num1;
         foreach($numeros as $num){
             $res-=$num;
         }
-    }else if($op===3){
+    }else if($op===3){//se multiplican si $op==3
         $res=$num1;
         foreach($numeros as $num){
             $res*=$num;
         }
-    }else{
+    }else{//se restan pares e impares si $op tiene cualquier otro valor
         $pares=0;
-        $impares=$num1;
+        $impares=$num1;//num1 estaría en posición 1 (impar)
         for($i=0; $i<count($numeros); $i++){
             if($i%2==0)
                 $pares+=$numeros[$i];
@@ -76,6 +86,16 @@ function operaciones(int $op, float $num1, float ...$numeros): float | false
         }
         $res=$pares-$impares;
     }
+
+    return $res;
+
+}
+
+function devuelve(int &$num1, int $num2=10, int $num3=10): int
+{
+
+    $res=$num1*$num2*$num3;
+    $num1+=$num2+$num3;
 
     return $res;
 

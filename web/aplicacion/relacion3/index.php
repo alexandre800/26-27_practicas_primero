@@ -63,9 +63,23 @@ function cuerpo()
 
 
     echo "<br><h1>Ejercicio 3</h1>";
-    echo "Operaciones (1, 2, 5): ".operaciones(1,2,5)."<br>";
-    echo "Operaciones (2, 4, 5, 6, 7): ".operaciones(2, 4, 5, 6, 7)."<br>";
-    echo "Operaciones (3, 4, 5, 9): ".operaciones(3, 4, 5, 9)."<br>";
-    echo "Operaciones (23, 4, 5, 3, 8, 1, 3, 7, 2): ".operaciones(23, 4, 5, 3, 8, 1, 3, 7, 2)."<br>";
+    echo "Operaciones (operación 1, operandos [2, 5]): ".operaciones(1,2,5)."<br>";
+    echo "Operaciones (operación 2, operandos [4, 5, 6, 7]): ".operaciones(2, 4, 5, 6, 7)."<br>";
+    echo "Operaciones (operación 3, operandos [4, 5, 9]): ".operaciones(3, 4, 5, 9)."<br>";
+    echo "Operaciones (operación 23, operandos [4, 5, 3, 8, 1, 3, 7, 2]): ".operaciones(23, 4, 5, 3, 8, 1, 3, 7, 2)."<br>";
 
+
+    echo "<br><h1>Ejercicio 4</h1>";
+    
+    $num1=1;
+    echo "Devuelve (1, 2, 3)-> multiplicación: ".devuelve($num1,2,3).", suma: ".$num1."<br>";
+    
+    $num1=1;
+    echo "Devuelve (1)-> multiplicación: ".devuelve($num1).", suma: ".$num1."<br>";
+    
+    $num1=1;
+    echo "Devuelve (1, 5)-> multiplicación: ".devuelve($num1, 5).", suma: ".$num1."<br>";
+
+    $num1=1;
+    echo "Devuelve (1, parámetro no especificado, 4)-> multiplicación: ".devuelve($num1, num3:4).", suma: ".$num1."<br>";
 }
