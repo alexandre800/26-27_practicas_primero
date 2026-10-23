@@ -100,9 +100,7 @@ function cuerpo()
     echo "<br><h1>Ejercicio 7</h1>";
     $vector=array("uno","grande","caminos","a");
     //ordeno el vector
-    $vector=ordenar($vector, function($a, $b){
-        return strlen($b) - strlen($a);
-    });
+    $vector=ordenar($vector);
 
     echo "Ordeno el array de forma descendente según el número de caracteres de cada elemento: ";
     foreach($vector as $elem){

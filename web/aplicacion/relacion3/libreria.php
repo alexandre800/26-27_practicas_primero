@@ -178,16 +178,18 @@ function llamadaAFuncion(int $num1, int $num2, callable $funcion): int{
 }
 
 /**
- * ordena un array usando la funcion usort, que implementa la funcion que se pasa
- * como parámetro, devuelve el array ordenado
+ * ordena un array de strings usando la funcion usort, que implementa una función anónima
+ * para ordenar según el número de caracteres de cada cadena, de forma descendente.
+ * Devuelve el array ordenado
  *
  * @param array $array
- * @param callable $function
  * @return array
  */
-function ordenar(array $array, callable $function): array{
+function ordenar(array $array): array{
 
-    usort($array, $function);
+    usort($array, function($a, $b){
+        return strlen($b) - strlen($a);
+    });
     return $array;
 
 }
