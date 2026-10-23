@@ -92,7 +92,8 @@ function operaciones(int $op, float $num1, float ...$numeros): float
 }
 
 /**
- * Undocumented function
+ * Se devuelve la multiplicación de los tres parámetros (números)
+ * Se suman los 3 parámetros y se guarda el resultado en $num1, pasado por referencia
  *
  * @param integer $num1
  * @param integer $num2
