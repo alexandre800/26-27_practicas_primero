@@ -91,6 +91,14 @@ function operaciones(int $op, float $num1, float ...$numeros): float
 
 }
 
+/**
+ * Undocumented function
+ *
+ * @param integer $num1
+ * @param integer $num2
+ * @param integer $num3
+ * @return integer
+ */
 function devuelve(int &$num1, int $num2=10, int $num3=10): int
 {
 
@@ -98,5 +106,87 @@ function devuelve(int &$num1, int $num2=10, int $num3=10): int
     $num1+=$num2+$num3;
 
     return $res;
+}
+
+/**
+ * Suma el parámetro 1 con el parámetro 2
+ *
+ * @param integer $num1
+ * @param integer $num2
+ * @return integer
+ */
+function suma(int $num1, int $num2): int{
+    return $num1+$num2;
+}
+
+/**
+ * Resta el parámetro 1 con el parámetro 2
+ *
+ * @param integer $num1
+ * @param integer $num2
+ * @return integer
+ */
+function resta(int $num1, int $num2): int{
+    return $num1-$num2;
+}
+
+/**
+ * Multiplica el parámetro 1 por el parámetro 2
+ *
+ * @param integer $num1
+ * @param integer $num2
+ * @return integer
+ */
+function multiplicacion(int $num1, int $num2): int{
+    return $num1*$num2;
+}
+
+/**
+ * Recibe una cadena que debe estar entre tres valores ("suma", "resta", "multiplicacion"),
+ * si no lo está devuelve false, en caso contrario, se usa la cadena como variable función
+ * para calcular una de las tres posibles operaciones, y devolver el resultado
+ *
+ * @param string $cadena
+ * @param integer $num1
+ * @param integer $num2
+ * @return int | false
+ */
+function hacerOperacion(string $cadena, int $num1, int $num2): int | false{
+
+    $opValidas = ["suma", "resta", "multiplicacion"];
+
+    if(!in_array($cadena, $opValidas, true))
+        return false;
+
+    return $cadena($num1, $num2);
+}
+
+/**
+ * se llama a una función que se especifica en la llamada para que haga un cálculo 
+ * entre $num1 y $num2, devuelve su resultado
+ *
+ * @param integer $num1
+ * @param integer $num2
+ * @param callable $funcion
+ * @return integer
+ */
+function llamadaAFuncion(int $num1, int $num2, callable $funcion): int{
+
+    return $funcion($num1, $num2);
+
+}
+
+/**
+ * ordena un array usando la funcion usort, que implementa la funcion que se pasa
+ * como parámetro, devuelve el array ordenado
+ *
+ * @param array $array
+ * @param callable $function
+ * @return array
+ */
+function ordenar(array $array, callable $function): array{
+
+    usort($array, $function);
+    return $array;
 
 }

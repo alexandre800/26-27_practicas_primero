@@ -82,4 +82,31 @@ function cuerpo()
 
     $num1=1;
     echo "Devuelve (1, parámetro no especificado, 4)-> multiplicación: ".devuelve($num1, num3:4).", suma: ".$num1."<br>";
+    echo "<br><h1>Ejercicio 5</h1>";
+    echo "Hacer operación (\"suma\", 2, 5): ".hacerOperacion("suma",2,5)."<br>";
+    echo "Hacer operación (\"resta\", 2, 5): ".hacerOperacion("resta",2,5)."<br>";
+    echo "Hacer operación (\"multiplicación\", 2, 5): ".hacerOperacion("multiplicacion",2,5)."<br>";
+    
+    $resul=hacerOperacion("fallo",2,5);
+    echo "Hacer operación (\"fallo\", 2, 5): ".($resul ? $resul : "operación incorrecta")."<br>";
+
+
+    echo "<br><h1>Ejercicio 6</h1>";
+    echo "llamadaAFuncion(1,2, suma con función flecha): ".llamadaAFuncion(1,2,fn($a,$b)=>$a+$b)."<br>";
+    echo "llamadaAFuncion(1,2, resta con función flecha): ".llamadaAFuncion(1,2,fn($a,$b)=>$a-$b)."<br>";
+    echo "llamadaAFuncion(1,2, multiplicación con función flecha): ".llamadaAFuncion(1,2,fn($a,$b)=>$a*$b)."<br>";
+
+
+    echo "<br><h1>Ejercicio 7</h1>";
+    $vector=array("uno","grande","caminos","a");
+    //ordeno el vector
+    $vector=ordenar($vector, function($a, $b){
+        return strlen($b) - strlen($a);
+    });
+
+    echo "Ordeno el array de forma descendente según el número de caracteres de cada elemento: ";
+    foreach($vector as $elem){
+        echo $elem.", ";
+    }
+
 }
