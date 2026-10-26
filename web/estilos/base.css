@@ -25,6 +25,20 @@ body {
     font-style: italic;
 }
 
+#barraMenu{
+    background-color: #14e737;
+}
+#barraMenu ul{
+    display: flex;
+}
+#barraMenu ul li{
+    list-style: none;
+    padding: 7px;
+}
+#barraMenu ul li a{
+    text-decoration: none;
+}
+
 #barraUbicacion{
     background-color: white;
     color: black;
