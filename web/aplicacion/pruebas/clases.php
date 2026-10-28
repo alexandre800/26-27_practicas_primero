@@ -115,6 +115,41 @@ class Unica{
 //se incluye el fichero automáticamente por una línea de código en cabecera
 $ins=new Instituto();
 
+
+//sobrecarga
+$clase1=new Clasenormal();
+$clase2=new Clasenormal();
+
+$clase1->cadena="hola mundo";
+
+$cad="";
+if(isset($clase1->cadena))
+    $cad=$clase1->cadena;
+
+if(isset($clase2->cadena))
+    $cad=$clase2->cadena;
+
+// $clase1=new ClaseSinsobrecarga();
+// $clase1->cadena="adios";
+// if(isset($clase1->cadena))
+//     $cad=$clase1->cadena;
+
+$clase1=new ClaseSobrecarga();
+$val=$clase1->moreno;
+$val=$clase1->marcha;
+$val=$clase1->numero;
+//$val=$clase1->hora;//solo da excepcion en esta
+
+
+//la clase dinamica guarda las propiedades en un array privado
+$clase1=new ClaseDinamica();
+$clase2=new ClaseDinamica();
+$clase1->nombre="vicente";
+$cadena=$clase1->nombre;
+
+$clase1->varPublica=20;
+$cadena=$clase2->nombre;
+
 //dibuja la plantilla de la vista
 inicioCabecera("APLICACION PRIMER TRIMESTRE");
 cabecera();

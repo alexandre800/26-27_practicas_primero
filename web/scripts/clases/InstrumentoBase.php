@@ -12,7 +12,7 @@ abstract class InstrumentoBase
     protected static int $_totalInstrumentos = 0;
 
     // Orden de creación de la instancia
-    private int $_ordenCreacion;
+    protected int $_ordenCreacion;
 
     //Se llama al constructor cada vez que se crea una instancia de la clase,
     //inicializo todas las variables aquí

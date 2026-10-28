@@ -22,6 +22,11 @@ function cabecera() {}
 function cuerpo()
 {
 
+    $inst1 = new InstrumentoViento();
+    $inst2 = new InstrumentoViento(3, "plástico");
+    $inst3 = Flauta::crearDesdeArray();
+    $inst4 = clone $inst3;
+
     echo "<h1>Ejercicio 1</h1>";
     echo "Clase InstrumentoBase creada";
     // $inst1 = new InstrumentoBase("guitarra");
@@ -43,13 +48,16 @@ function cuerpo()
 
 
     echo "<br><br><h1>Ejercicio 3</h1>";
-    $inst1 = new InstrumentoViento();
-    $inst2 = new InstrumentoViento(3, "plástico");
 
     echo $inst1;
     echo ": ".$inst1->afinar()."<br>";
     echo "Voy a tocar un poco de ".$inst1->getDescripcion().": ".$inst1->sonido()."<br><br>";
     $inst2->envejecer();
     echo $inst2;
+
+
+    echo "<br><br><h1>Ejercicio 4</h1>";
+    echo $inst3."<br><br>";
+    echo $inst4;
 
 }
