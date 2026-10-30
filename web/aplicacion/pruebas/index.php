@@ -31,5 +31,6 @@ function cuerpo(){
     <a href="expresiones_regulares.php">expresiones regulares</a>
     <a href="index_funciones.php">funciones</a>
     <a href="clases.php">clases</a>
+    <a href="pagformulario.php">formulario</a>
 <?php
 }
