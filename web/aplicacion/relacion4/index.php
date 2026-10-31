@@ -76,6 +76,31 @@ function cuerpo()
     );
 
     echo $persona;
+
+
+    echo "<br><br><h1>Ejercicio 6</h1>";
+
+    //genero la serie de fibonacci de 10 creando una instancia
+    foreach(new SerieFibonacci(10) as $valor) { 
+        echo "$valor &nbsp;"; 
+    }
+    
+    //genero la serie de fibonacci de 10 usando el método de clase fFibonacci
+    echo "<br><br>";
+    foreach(SerieFibonacci::fFibonacci(10) as $valor){
+        echo "$valor &nbsp;"; 
+    }
+
+
+    echo "<br><br><h1>Ejercicio 7</h1>";
+    $Objeto= new ClaseMisPropiedades (); 
+    $Objeto->propPublica="publica"; 
+    //$Objeto->_propPrivada="privada"; //no es valida al ser privada 
+    $Objeto->propiedad1=25; 
+    $Objeto->propiedad2="cadena de texto"; 
+    echo "la propiedad 1 vale ".$Objeto->propiedad1."<br>";
+    echo $Objeto->propiedad3; // esto debería dar un error al no haber asignado previamente la propiedad 
+
 }
 
 /**

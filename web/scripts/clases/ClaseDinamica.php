@@ -5,7 +5,7 @@ class ClaseDinamica
     {
         echo "este método existe";
     }
-    //secargaríasinoexisteelmétodovisible 
+    //se cargaría si no existe el método visible 
     public function __call(string $nombre, array $argumentos): mixed
     {
         $cadena = implode(',', $argumentos);
@@ -20,8 +20,7 @@ class ClaseDinamica
     {
         $cadena = implode(',', $argumentos);
 
-        echo "se ha llamado al metodo estático $nombre con argumentos $cade
-na";
+        echo "se ha llamado al metodo estático $nombre con argumentos $cadena";
     }
 }
 
