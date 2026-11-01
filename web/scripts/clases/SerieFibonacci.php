@@ -1,4 +1,9 @@
 <?php
+/**
+ * Clase iterable que genera y recorre los términos de la sucesión de Fibonacci
+ * hasta un límite especificado. Implementa la interfaz Iterator y proporciona
+ * un generador estático para obtener los valores de la serie.
+ */
 class SerieFibonacci implements Iterator{
 
     //propiedades privadas
@@ -13,9 +18,11 @@ class SerieFibonacci implements Iterator{
 
     //función estática que devuelve la serie de fibonacci usando un generador
     public static function fFibonacci(int $ultimo){
-        yield 0;
         
-        if($ultimo!=0)//comprobación para que no devuelva 0 y 1 si es el fib(0)
+        if($ultimo==0 || $ultimo==1)
+            yield 0;
+        
+        if($ultimo==1)
             yield 1;
 
         for($i=2; $i<=$ultimo; $i++){
@@ -53,5 +60,17 @@ class SerieFibonacci implements Iterator{
         //es válida si es mayor o igual a 0 y menor o igual al límite
         return($this->_claveActual<=$this->_limite && $this->_claveActual>=0);
     }
+
+
+    //Métodos para deshabilitar la sobrecarga dinámica
+    public function __get(string $name)
+    {
+        throw new \Exception("La propiedad ".$name."no existe");
+    }
+    public function __set(string $name, mixed $value): void
+    {
+        throw new \Exception("La propiedad ".$name."no existe");
+    }
+    public function __isset(string $nombre): bool {return false;}
 
 }

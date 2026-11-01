@@ -1,4 +1,10 @@
 <?php
+/**
+ * Clase que modela una persona mediante sus datos personales y estado
+ * civil. Permite crear instancias mediante un método de fábrica estático,
+ * acceder a sus atributos mediante getters y setters y obtener una
+ * descripción textual del objeto.
+ */
 class Persona{
 
     //propiedades privadas
@@ -73,5 +79,16 @@ class Persona{
         " nacida en ".$this->getFechaNacimiento()." y que vive en ".$this->getDomicilio().
         ", ".$this->getLocalidad() ;
     }
+
+    //Métodos para deshabilitar la sobrecarga dinámica
+    public function __get(string $name)
+    {
+        throw new \Exception("La propiedad ".$name."no existe");
+    }
+    public function __set(string $name, mixed $value): void
+    {
+        throw new \Exception("La propiedad ".$name."no existe");
+    }
+    public function __isset(string $nombre): bool {return false;}
 
 }

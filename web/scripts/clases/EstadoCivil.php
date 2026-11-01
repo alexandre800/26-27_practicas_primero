@@ -1,4 +1,9 @@
 <?php
+/**
+ * Enumerado que almacena los distintos estados civiles y sus valores
+ * asociados, permitiendo obtener su descripción, valor y listado completo
+ * de casos.
+ */
 enum EstadoCivil : int
 { 
     case soltero=10; 

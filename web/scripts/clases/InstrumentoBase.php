@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Clase abstracta que representa un instrumento musical. Gestiona la
+ * descripción, edad, orden de creación y número de instrumentos creados,
+ * obligando a las subclases a implementar los métodos sonido() y afinar().
+ */
 abstract class InstrumentoBase
 {
     //descripcion privada no directamente accesible
@@ -64,4 +68,16 @@ abstract class InstrumentoBase
             . self::$_totalInstrumentos . ". Tiene {$this->_edad} años. "
             . "La clase es " . get_class($this);
     }
+    
+    //Métodos para deshabilitar la sobrecarga dinámica
+    public function __get(string $name)
+    {
+        throw new \Exception("La propiedad ".$name."no existe");
+    }
+    public function __set(string $name, mixed $value): void
+    {
+        throw new \Exception("La propiedad ".$name."no existe");
+    }
+    public function __isset(string $nombre): bool {return false;}
+
 }

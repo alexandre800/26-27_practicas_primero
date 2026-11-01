@@ -1,6 +1,10 @@
 <?php
 
-
+/**
+ * Clase que modela un instrumento de viento. Hereda de InstrumentoBase,
+ * añade el material de fabricación e implementa los métodos sonido() y
+ * afinar() definidos en la clase padre.
+ */
 class InstrumentoViento extends InstrumentoBase
 {
 

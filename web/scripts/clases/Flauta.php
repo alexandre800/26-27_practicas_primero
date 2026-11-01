@@ -1,4 +1,9 @@
 <?php
+/**
+ * Clase que modela una flauta. Hereda de InstrumentoViento e implementa
+ * iFabricable. Permite crear objetos desde un array, clonar instancias y
+ * definir los métodos de fabricación y reciclado.
+ */
 class Flauta extends InstrumentoViento implements iFabricable{
 
     //constructor privado
