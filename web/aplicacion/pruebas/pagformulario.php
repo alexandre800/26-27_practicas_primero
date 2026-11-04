@@ -7,6 +7,19 @@ $barra = [
     ["TEXTO" => "formulario", "ENLACE" => "pagformulario.php"]
 ];
 
+//filtrado?
+$o = [
+    "options" => [
+        "min_range" => 100,
+        "max_range" => 200,
+        "default" => 50
+    ]/*,
+    "flags"=>FILTER_FLAG_ALLOW_HEX*/
+];
+
+$res = filter_var(12, FILTER_VALIDATE_INT, $o);
+$res = filter_var('0xAb9', FILTER_VALIDATE_INT, $o);
+
 //inicializaciones
 $datos = [
     "nombre" => "",
@@ -15,7 +28,8 @@ $datos = [
 $errores = [];
 
 //comprobar si se ha dado a insertar
-if ($_POST) {
+// if ($_POST) {
+if (isset($_POST["cr"])) {
     $nombre = "";
     if (isset($_POST["nombre"])) {
         $nombre = $_POST["nombre"];
@@ -79,7 +93,16 @@ function formulario($datos, $errores)
         <input type="text" name="precio" id="precio"
             value="<?php echo $datos["precio"]; ?>" size=4
             maxlength="3"><br>
-        <input type="submit" class="boton" value="Crear">
+        Elige estas opciones:<br />
+        <input type="checkbox" name="opciones[]" value="menor" />
+        Menor de edad <br />
+        <input type="checkbox" name="opciones[]" value="minusvalia" />
+        Minusvalía<br />
+        <input type="checkbox" name="opciones[]" value="numerosa" />
+        Familia numerosa <br />
+        <input type="checkbox" name="opciones[]" value="minima" />
+        Renta mínima<br />
+        <input type="submit" class="boton" value="Crear" name="cr">
     </form>
 <?php
 }

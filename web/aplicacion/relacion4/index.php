@@ -47,6 +47,7 @@ function cuerpo()
     //Creo los instrumentos
     $inst1 = new InstrumentoViento();
     $inst2 = new InstrumentoViento(3, "plástico");
+    //$inst3 = Flauta::crearDesdeArray(["material"=>"ad", "edad"=>2]);
     $inst3 = Flauta::crearDesdeArray();
     $inst4 = clone $inst3;
 
