@@ -13,13 +13,13 @@ namespace VALNORMAL;
  */
 function validaEntero(int &$var, int $min, int $max, int $defecto):bool{
 
-    $var=intval($var);//sanear valor
+    //falso si no está entre min y max
+    if( $var<$min || $var>$max){
+        $var=$defecto;
+        return false;
+    }
 
-    if($var>$min && $var<$max)//true si está entre min y max
-        return true;
-
-    $var=$defecto;//false, y se asigna el valor por defecto si no
-    return false;
+    return true;
 }
 
 /**
@@ -33,6 +33,14 @@ function validaEntero(int &$var, int $min, int $max, int $defecto):bool{
  */
 function validaReal(float &$var, float $min, float $max, float $defecto):bool{
 
+    //falso si no está entre min y max
+    if( $var<$min || $var>$max){
+        $var=$defecto;
+        return false;
+    }
+
+    return true;
+
 }
 
 /**
@@ -44,6 +52,14 @@ function validaReal(float &$var, float $min, float $max, float $defecto):bool{
  */
 function validaFecha(string &$var, string $defecto):bool{
 
+    if($fecha = \DateTime::createFromFormat('d/m/Y', $var)){
+        $var=$fecha->format("d/m/Y");
+        return true;
+    }
+    
+    $var = $defecto;
+    return false;
+
 }
 
 /**
@@ -54,6 +70,14 @@ function validaFecha(string &$var, string $defecto):bool{
  * @return boolean
  */
 function validaHora(string &$var, string $defecto):bool {
+
+    if($hora = \DateTime::createFromFormat('H:i:s', $var)){
+        $var=$hora->format("H:i:s");
+        return true;
+    }
+    
+    $var = $defecto;
+    return false;
 
 }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace VALFILTER;
 
 /**
@@ -10,8 +11,22 @@ namespace VALFILTER;
  * @param integer $defecto
  * @return boolean
  */
-function validaEntero(int &$var, int $min, int $max, int $defecto):bool{
+function validaEntero(int &$var, int $min, int $max, int $defecto): bool
+{
 
+    $o = [
+        "options" => [
+            "min_range" => $min,
+            "max_range" => $max
+        ]
+    ];
+
+    if(!filter_var($var, FILTER_VALIDATE_INT, $o)){
+        $var=$defecto;
+        return false;
+    }
+
+    return true;
 }
 
 /**
@@ -23,9 +38,7 @@ function validaEntero(int &$var, int $min, int $max, int $defecto):bool{
  * @param float $defecto
  * @return boolean
  */
-function validaReal(float &$var, float $min, float $max, float $defecto):bool{
-
-}
+function validaReal(float &$var, float $min, float $max, float $defecto): bool {}
 
 /**
  * Undocumented function
@@ -34,9 +47,7 @@ function validaReal(float &$var, float $min, float $max, float $defecto):bool{
  * @param string $defecto
  * @return boolean
  */
-function validaFecha(string &$var, string $defecto):bool{
-
-}
+function validaFecha(string &$var, string $defecto): bool {}
 
 /**
  * Undocumented function
@@ -45,9 +56,7 @@ function validaFecha(string &$var, string $defecto):bool{
  * @param string $defecto
  * @return boolean
  */
-function validaHora(string &$var, string $defecto):bool {
-
-}
+function validaHora(string &$var, string $defecto): bool {}
 
 /**
  * Undocumented function
@@ -56,9 +65,7 @@ function validaHora(string &$var, string $defecto):bool {
  * @param string $defecto
  * @return boolean
  */
-function validaEmail(string &$var, string $defecto):bool{
-
-}
+function validaEmail(string &$var, string $defecto): bool {}
 
 /**
  * Undocumented function
@@ -68,9 +75,7 @@ function validaEmail(string &$var, string $defecto):bool{
  * @param string $defecto
  * @return boolean
  */
-function validaCadena(string &$var, int $longitud, string $defecto):bool{
-
-}
+function validaCadena(string &$var, int $longitud, string $defecto): bool {}
 
 /**
  * Undocumented function
@@ -80,9 +85,7 @@ function validaCadena(string &$var, int $longitud, string $defecto):bool{
  * @param string $defecto
  * @return boolean
  */
-function validaExpresion(string &$var, string $expresion, string $defecto):bool{
-
-}
+function validaExpresion(string &$var, string $expresion, string $defecto): bool {}
 
 /**
  * Undocumented function
@@ -92,6 +95,4 @@ function validaExpresion(string &$var, string $expresion, string $defecto):bool{
  * @param integer $tipo
  * @return boolean
  */
-function validaRango(mixed $var, array $posibles, int $tipo=1):bool{
-
-}
+function validaRango(mixed $var, array $posibles, int $tipo = 1): bool {}

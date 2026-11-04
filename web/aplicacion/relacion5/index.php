@@ -38,6 +38,7 @@ function cabecera() {}
 function cuerpo($datos, $errores)
 {
 ?>
+    <a href="pruebasFiltrado.php">Pruebas de las librerías</a>
     <br>
     <br>
     <br>
