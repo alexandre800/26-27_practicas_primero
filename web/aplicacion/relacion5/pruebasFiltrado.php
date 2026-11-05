@@ -59,7 +59,7 @@ function cuerpo()
         (\VALNORMAL\validaFecha($variable, "01/01/2000") ? "fecha válida" : "fecha inválida") .
         ", valor actual->" . $variable;
 
-    $variable = "0:5:1";
+    $variable = "0:5:15";
     echo "<br><br>Valido hora {$variable}: " .
         (\VALNORMAL\validaHora($variable, "8:00:00") ? "hora válida" : "hora inválida") .
         ", valor actual->" . $variable;
@@ -68,6 +68,60 @@ function cuerpo()
     echo "<br>Valido hora {$variable}: " .
         (\VALNORMAL\validaHora($variable, "8:00:00") ? "hora válida" : "hora inválida") .
         ", valor actual->" . $variable;
+
+    $variable = "paco@gmail.com";
+    echo "<br><br>Valido email {$variable}: " .
+        (\VALNORMAL\validaEmail($variable, "user@example.com") ? "email válido" : "email inválido") .
+        ", valor actual->" . $variable;
+
+    $variable = "paco123@g.educaand.es";
+    echo "<br>Valido email {$variable}: " .
+        (\VALNORMAL\validaEmail($variable, "user@example.com") ? "email válido" : "email inválido") .
+        ", valor actual->" . $variable;
+
+    $variable = "@fe233.324.dsfaf";
+    echo "<br>Valido email {$variable}: " .
+        (\VALNORMAL\validaEmail($variable, "user@example.com") ? "email válido" : "email inválido") .
+        ", valor actual->" . $variable;
+
+    $variable = "                        fdsfvs";
+    echo "<br><br>Valido cadena {$variable}: " .
+        (\VALNORMAL\validaCadena($variable, 15, "por defecto") ? "cadena válida" : "cadena inválida") .
+        ", valor actual->" . $variable;
+
+    $variable = "vdsvdvsdvffggbsdfb";
+    echo "<br>Valido cadena {$variable}: " .
+        (\VALNORMAL\validaCadena($variable, 15, "por defecto") ? "cadena válida" : "cadena inválida") .
+        ", valor actual->" . $variable;
+
+    $variable = "Paco";
+    echo "<br><br>Valido expresión {$variable}: " .
+        (\VALNORMAL\validaExpresion($variable, "/^[^H]/", "por defecto") ? "expresión válida" : "expresión inválida") .
+        ", valor actual->" . $variable;
+
+    $variable = "Héctor";
+    echo "<br>Valido expresión {$variable}: " .
+        (\VALNORMAL\validaExpresion($variable, "/^[^H]/", "por defecto") ? "expresión válida" : "expresión inválida") .
+        ", valor actual->" . $variable;
+
+    $variable = "Paco";
+    $array = ["alumno1"=>"Pedro", "alumno2"=>"Paco", "alumno3"=>"María"];
+    echo "<br><br>Está {$variable} en el array: " .
+        (\VALNORMAL\validaRango($variable, $array, 1) ? "si" : "no");
+
+    $variable = "Héctor";
+    echo "<br>Está {$variable} en el array: " .
+        (\VALNORMAL\validaRango($variable, $array) ? "si" : "no");//tercer parámetro=1 por defecto
+
+    $variable = "alumno3";
+    echo "<br><br>Está el alumno con clave {$variable} en el array: " .
+        (\VALNORMAL\validaRango($variable, $array, 2) ? "si" : "no");
+
+    $variable = "alumno4";
+    echo "<br>Está el alumno con clave {$variable} en el array: " .
+        (\VALNORMAL\validaRango($variable, $array, 2) ? "si" : "no");
+
+
 
     echo "<br><br><h2>Validación con var_filter</h2>";
 
@@ -80,5 +134,9 @@ function cuerpo()
     echo "<br>Valido entero {$variable}: " .
         (\VALFILTER\validaEntero($variable, 0, 20, 0) ? "número válido" : "número inválido") .
         ", valor actual->" . $variable;
+
+}
+
+function mostrarValidacion($variable){
 
 }

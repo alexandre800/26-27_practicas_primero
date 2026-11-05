@@ -1,6 +1,8 @@
 <?php
+
 namespace VALNORMAL;
 
+use LengthException;
 
 /**
  * Undocumented function
@@ -11,11 +13,12 @@ namespace VALNORMAL;
  * @param integer $defecto
  * @return boolean
  */
-function validaEntero(int &$var, int $min, int $max, int $defecto):bool{
+function validaEntero(int &$var, int $min, int $max, int $defecto): bool
+{
 
     //falso si no está entre min y max
-    if( $var<$min || $var>$max){
-        $var=$defecto;
+    if ($var < $min || $var > $max) {
+        $var = $defecto;
         return false;
     }
 
@@ -31,16 +34,16 @@ function validaEntero(int &$var, int $min, int $max, int $defecto):bool{
  * @param float $defecto
  * @return boolean
  */
-function validaReal(float &$var, float $min, float $max, float $defecto):bool{
+function validaReal(float &$var, float $min, float $max, float $defecto): bool
+{
 
     //falso si no está entre min y max
-    if( $var<$min || $var>$max){
-        $var=$defecto;
+    if ($var < $min || $var > $max) {
+        $var = $defecto;
         return false;
     }
 
     return true;
-
 }
 
 /**
@@ -50,16 +53,17 @@ function validaReal(float &$var, float $min, float $max, float $defecto):bool{
  * @param string $defecto
  * @return boolean
  */
-function validaFecha(string &$var, string $defecto):bool{
+function validaFecha(string &$var, string $defecto): bool
+{
 
-    if($fecha = \DateTime::createFromFormat('d/m/Y', $var)){
-        $var=$fecha->format("d/m/Y");
+    $var = trim($var);
+    if ($fecha = \DateTime::createFromFormat('d/m/Y', $var)) {
+        $var = $fecha->format("d/m/Y");
         return true;
     }
-    
+
     $var = $defecto;
     return false;
-
 }
 
 /**
@@ -69,16 +73,24 @@ function validaFecha(string &$var, string $defecto):bool{
  * @param string $defecto
  * @return boolean
  */
-function validaHora(string &$var, string $defecto):bool {
+function validaHora(string &$var, string $defecto): bool
+{
 
-    if($hora = \DateTime::createFromFormat('H:i:s', $var)){
-        $var=$hora->format("H:i:s");
+    $var = trim($var);
+    $partes = explode(":", $var);
+    if (count($partes) === 3) {
+        $var = str_pad($partes[0], 2, '0', STR_PAD_LEFT) . ':' .
+            str_pad($partes[1], 2, '0', STR_PAD_LEFT) . ':' .
+            str_pad($partes[2], 2, '0', STR_PAD_LEFT);
+    }
+
+    if ($hora = \DateTime::createFromFormat('H:i:s', $var)) {
+        $var = $hora->format("H:i:s");
         return true;
     }
-    
+
     $var = $defecto;
     return false;
-
 }
 
 /**
@@ -88,8 +100,15 @@ function validaHora(string &$var, string $defecto):bool {
  * @param string $defecto
  * @return boolean
  */
-function validaEmail(string &$var, string $defecto):bool{
+function validaEmail(string &$var, string $defecto): bool
+{
 
+    $var = trim($var);
+    if (preg_match("/^[\w]+@[\w.]+\.[a-z]{2,3}$/", $var) === 1)
+        return true;
+
+    $var = $defecto;
+    return false;
 }
 
 /**
@@ -100,8 +119,15 @@ function validaEmail(string &$var, string $defecto):bool{
  * @param string $defecto
  * @return boolean
  */
-function validaCadena(string &$var, int $longitud, string $defecto):bool{
+function validaCadena(string &$var, int $longitud, string $defecto): bool
+{
 
+    $var = trim($var);
+    if (mb_strlen($var) <= $longitud)
+        return true;
+
+    $var = $defecto;
+    return false;
 }
 
 /**
@@ -112,8 +138,15 @@ function validaCadena(string &$var, int $longitud, string $defecto):bool{
  * @param string $defecto
  * @return boolean
  */
-function validaExpresion(string &$var, string $expresion, string $defecto):bool{
+function validaExpresion(string &$var, string $expresion, string $defecto): bool
+{
 
+    $var = trim($var);
+    if (preg_match($expresion, $var) === 1)
+        return true;
+
+    $var = $defecto;
+    return false;
 }
 
 /**
@@ -124,6 +157,18 @@ function validaExpresion(string &$var, string $expresion, string $defecto):bool{
  * @param integer $tipo
  * @return boolean
  */
-function validaRango(mixed $var, array $posibles, int $tipo=1):bool{
+function validaRango(mixed $var, array $posibles, int $tipo = 1): bool
+{
 
+    if($tipo===2)
+        $array=array_keys($posibles);
+    else
+        $array=$posibles;
+
+    foreach ($array as $elem) {
+        if ($elem === $var)
+            return true;
+    }
+
+    return false;
 }
