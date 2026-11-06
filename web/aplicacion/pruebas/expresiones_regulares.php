@@ -34,6 +34,15 @@ function cuerpo(){
     // $exp="/años/i/";//no distinguir mayus y minus
     preg_match($exp, $cadena, $resultado, PREG_OFFSET_CAPTURE);
 
+    //busqueda (?=) lo que va despues, (?<) lo que va antes
+    $exp="/\w+(?=;)/";//varios caracteres antes de ; (tercera)
+    $cadena="primera segunda tercera; cuarta quinta";
+    preg_match($exp, $cadena, $resultado, PREG_OFFSET_CAPTURE);
+
+    $exp="/\w+(?=.*;)/";//varios caracteres antes de lo que sea, y después el ; (primera)
+    $cadena="primera ;segunda tercera; cuarta quinta";
+    preg_match($exp, $cadena, $resultado, PREG_OFFSET_CAPTURE);
+
 ?>
 
 <?php
