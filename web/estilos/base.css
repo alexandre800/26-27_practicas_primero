@@ -8,7 +8,7 @@ body {
 #documento{
     margin: 0 auto;
     background-color: #dabe36;
-    width: 40%;
+    width: 50%;
     padding: 20px;
 }
 #cabecera{
@@ -23,6 +23,20 @@ body {
 #cabecera #titulo{
     font-size: 1.3em;
     font-style: italic;
+}
+
+#barraMenu{
+    background-color: #14e737;
+}
+#barraMenu ul{
+    display: flex;
+}
+#barraMenu ul li{
+    list-style: none;
+    padding: 7px;
+}
+#barraMenu ul li a{
+    text-decoration: none;
 }
 
 #barraUbicacion{

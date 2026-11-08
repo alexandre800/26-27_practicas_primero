@@ -60,24 +60,28 @@ function inicioCuerpo($cabecera, array $ubicacion)
         <div id="documento">
 
             <header>
-                <h1 id="titulo"><?php echo $cabecera; ?></h1>
+                <h1 id="titulo"><a href="../../index.php"><img src="../../imagenes/home.png"></a>  <?php echo $cabecera; ?></h1>
             </header>
 
             <div id="barraLogin">
 
             </div>
 
+            <div id="barraMenu">
+                <ul>
+                    <li><a href="/index.php">Inicio</a></li>
+                    <li><a href="/aplicacion/pruebas/index.php">Pruebas</a></li>
+                    <li><a href="/aplicacion/relacion1/index.php">Relación 1</a></li>
+                    <li><a href="/aplicacion/relacion2/index.php">Relación 2</a></li>
+                    <li><a href="/aplicacion/relacion3/index.php">Relación 3</a></li>
+                    <li><a href="/aplicacion/relacion4/index.php">Relación 4</a></li>
+                    <li><a href="/aplicacion/relacion5/index.php">Relación 5</a></li>
+                </ul>
+
+            </div>
+
             <div id="barraUbicacion">
                 <?php
-
-                // foreach ($ubicacion as $elemento) {
-                //     if (isset($elemento["ENLACE"])) {
-                //         echo "<a href='{$elemento["ENLACE"]}' >";
-                //         echo $elemento["TEXTO"] . "&nbsp;&nbsp;";
-                //         echo "</a>";
-                //     }else
-                //         echo $elemento["TEXTO"] . "&nbsp;&nbsp;";
-                // }
 
                 foreach ($ubicacion as $elemento) {
 
@@ -92,15 +96,6 @@ function inicioCuerpo($cabecera, array $ubicacion)
 
                 ?>
             </div>
-
-            <!-- <div id="barraMenu">
-                <ul>
-                    <li><a href="/index.php">Inicio</a></li>
-                    <li><a href="/aplicacion/pruebas/index.php">Pruebas</a></li>
-                    <li><a href="/aplicacion/relacion1/index.php">Relación 1</a></li>
-                </ul>
-
-            </div> -->
 
         <?php
     }
