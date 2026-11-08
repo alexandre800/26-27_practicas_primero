@@ -21,19 +21,19 @@ $datos = [
 ];
 $errores = [];
 
-//comprobar si se ha dado a insertar
-// if ($_POST) {
+//comprobar si se ha dado al botón validar
 if (isset($_POST["cr"])) {
 
+    //--------Validación de campos
     //nombre
     $nombre = "";
     if (isset($_POST["nombre"])) {
         $nombre = mb_strtoupper($_POST["nombre"]);
     }
     if (validaExpresion($nombre, "/^[^H][A-Z]{0,24}$/", "nombre"))
-        $datos["nombre"] = $nombre;
-    else
-        $errores["nombre"][] = "Error en el nombre";
+        $datos["nombre"] = $nombre;//si es válido se añade al array de datos
+    else //si no es válido se añade un error al array de errores
+        $errores["nombre"][] = "No debe empezar por h (máximo 24 caracteres)";
 
     //contraseña
     $passwd = "";
@@ -43,7 +43,7 @@ if (isset($_POST["cr"])) {
     if (validaExpresion($passwd, "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\$_\-;<>\@])[\S]{8,15}$/", "Contr4se\$a"))
         $datos["passwd"] = $passwd;
     else
-        $errores["contraseña"][] = "Error en la contraseña";
+        $errores["contraseña"][] = "Debe contener minúsculas, mayúsculas, caracteres especiales y números (8-15 caracteres)";
 
     //fecha nacimiento
     $fechaNac = "";
@@ -53,7 +53,7 @@ if (isset($_POST["cr"])) {
     if (validaFecha($fechaNac, "01/01/2000"))
         $datos["fechaNac"] = $fechaNac;
     else
-        $errores["fecha nacimiento"][] = "Error en la fecha nacimiento";
+        $errores["fecha nacimiento"][] = "Introduzca fecha formato (dd/mm/aaaa)";
 
     //fecha carnet
     $fechaCarnet = "";
@@ -62,14 +62,16 @@ if (isset($_POST["cr"])) {
     }
     if (validaFecha($fechaCarnet, "01/01/2026")) {
 
-        //comprobar si es mayor edad primero
-        if (DateTime::createFromFormat('d/m/Y', $fechaCarnet)->sub(new DateInterval('P18Y')) >=
-            DateTime::createFromFormat('d/m/Y', $fechaNac))
+        //comprobar si fecha de nacimiento +18 años es menor que fecha carnet
+        if (
+            DateTime::createFromFormat('d/m/Y', $fechaCarnet)->sub(new DateInterval('P18Y')) >=
+            DateTime::createFromFormat('d/m/Y', $fechaNac)
+        )
             $datos["fechaCarnet"] = $fechaCarnet;
         else
             $errores["fecha carnet"][] = "No es mayor de edad";
     } else
-        $errores["fecha carnet"][] = "Error en la fecha carnet";
+        $errores["fecha carnet"][] = "Introduzca fecha formato (dd/mm/aaaa)";
 
     //hora levantarse
     $horaLev = "";
@@ -79,8 +81,52 @@ if (isset($_POST["cr"])) {
     if (validaHora($horaLev, "08:00:00"))
         $datos["horaLev"] = $horaLev;
     else
-        $errores["hora levantarse"][] = "Error en la hora";
-    
+        $errores["hora levantarse"][] = "Introduzca hora formato (hh:mm:ss)";
+
+    //estado
+    $estado = 0;
+    if (isset($_POST["estado"])) {
+        $estado = ($_POST["estado"]);
+    }
+    if ($estado != 0)
+        $datos["estado"] = $estado;
+    else
+        $errores["estado"][] = "Seleccione su estado actual";
+
+
+    //estudios
+    $estudios = [];
+    if (isset($_POST["estudios"])) {
+        $estudios = ($_POST["estudios"]);
+    }
+    if (validaRango("6", $estudios, 1))
+        $errores["estudios"][] = "Opción inválida";
+    else if (count($estudios) > 1 && validaRango("0", $estudios, 1))
+        $errores["estudios"][] = "Si no tiene estudios, marque solo esa opción";
+    else if (!$estudios)
+        $errores["estudios"][] = "Indique sus estudios";
+    else
+        $datos["estudios"] = $estudios;
+
+    //hermanos
+    $hermanos = 0;
+    if (isset($_POST["hermanos"])) {
+        $hermanos = intval($_POST["hermanos"]);
+    }
+    if (validaEntero($hermanos, 0, 20, 0))
+        $datos["hermanos"] = $hermanos;
+    else
+        $errores["hermanos"][] = "Introduzca un número entero entre 0 y 20";
+
+    //sueldo
+    $sueldo = 0;
+    if (isset($_POST["sueldo"])) {
+        $sueldo = floatval($_POST["sueldo"]);
+    }
+    if (validaReal($sueldo, 1000, 150000, 1100))
+        $datos["sueldo"] = $sueldo;
+    else
+        $errores["sueldo"][] = "Introduzca un número entre 1000 y 150000";
 }
 
 
@@ -102,9 +148,65 @@ function cuerpo($datos, $errores)
     <br>
     <br>
     <br>
-<?php
-    formulario($datos, $errores);
+    <?php
+
+    //solo se muestra el resumen si se ha pulsado en validar y no hay errores
+    if (isset($_POST["cr"]) && empty($errores)) {
+
+        echo "<h2>Datos introducidos correctamente</h2>";
+
+        echo "Nombre: {$datos['nombre']}<br>";
+        echo "Contraseña: {$datos['passwd']}<br>";
+        echo "Fecha nacimiento: {$datos['fechaNac']}<br>";
+        echo "Fecha carnet: {$datos['fechaCarnet']}<br>";
+        echo "Hora levantarse: {$datos['horaLev']}<br>";
+
+        switch ($datos["estado"]) {
+            case 1:
+                echo "Estado: estudiante";
+                break;
+            case 2:
+                echo "Estado: en paro";
+                break;
+            case 3:
+                echo "Estado: trabajando";
+                break;
+            case 4:
+                echo "Estado: jubilado";
+                break;
+        }
+
+        $cad = "<br>Estudios: ";
+        foreach ($datos["estudios"] as $estudio) {
+            switch ($estudio) {
+                case 0:
+                    $cad .= "sin estudios";
+                    break;
+                case 1:
+                    $cad .= "primaria ";
+                    break;
+                case 2:
+                    $cad .= "secundaria ";
+                    break;
+                case 3:
+                    $cad .= "bachillerato ";
+                    break;
+                case 4:
+                    $cad .= "ciclo formativo ";
+                    break;
+                case 5:
+                    $cad .= "universitarios ";
+                    break;
+            }
+        }
+        echo $cad."<br>";
+
+        echo "Hermanos: {$datos['hermanos']}<br>";
+        echo "Sueldo: {$datos['sueldo']}<br>";
+    } else //si no, se muestra el formulario
+        formulario($datos, $errores);
 }
+
 function formulario($datos, $errores)
 {
     if ($errores) { //mostrar los errores
@@ -114,10 +216,8 @@ function formulario($datos, $errores)
                 echo "$clave => $error<br>" . PHP_EOL;
         }
         echo "</div>";
-    } else { //si no hay errores, muestro el resumen
-
     }
-?>
+    ?>
     <form action="" method="post">
         <label for="nombre">Nombre: </label>
         <input type="text" name="nombre" id="nombre"
@@ -142,13 +242,13 @@ function formulario($datos, $errores)
             value="<?php echo $datos["horaLev"]; ?>"><br>
 
         <br><label for="estado">Estado:<br />
-            <input type="radio" name="estado[]" value=1 />
+            <input type="radio" name="estado" value=1 />
             Estudiante <br />
-            <input type="radio" name="estado[]" value=2 />
+            <input type="radio" name="estado" value=2 />
             En paro<br />
-            <input type="radio" name="estado[]" value=3 />
+            <input type="radio" name="estado" value=3 />
             Trabajando <br />
-            <input type="radio" name="estado[]" value=4 />
+            <input type="radio" name="estado" value=4 />
             Jubilado<br /></label><br>
 
         <br><label for="estudios">Estudios:<br />
@@ -159,20 +259,22 @@ function formulario($datos, $errores)
             <input type="checkbox" name="estudios[]" value=2 />
             Secundaria <br />
             <input type="checkbox" name="estudios[]" value=3 />
-            Bachillerato</label><br />
-        <input type="checkbox" name="estudios[]" value=4 />
-        Ciclo formativo</label><br />
-        <input type="checkbox" name="estudios[]" value=5 />
-        Universitarios
+            Bachillerato<br />
+            <input type="checkbox" name="estudios[]" value=4 />
+            Ciclo formativo<br />
+            <input type="checkbox" name="estudios[]" value=5 />
+            Universitarios<br />
+            <input type="checkbox" name="estudios[]" value=6 />
+            Opción inválida
         </label><br />
 
         <br><label for="hermanos">Número de hermanos:
-            <input type="number" name="hermanos" id="hermanos">
+            <input type="number" name="hermanos" id="hermanos" value=0>
         </label><br />
 
         <label for="sueldo">Sueldo: </label>
         <input type="number" name="sueldo" id="sueldo"
-            value="<?php echo $datos["sueldo"]; ?>"><br>
+            value=1100><br>
 
         <input type="submit" class="boton" value="Validar" name="cr">
 

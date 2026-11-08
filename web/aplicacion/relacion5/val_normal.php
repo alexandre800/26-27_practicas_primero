@@ -1,22 +1,25 @@
 <?php
 
+/**
+ * Biblioteca de funciones de validación de varios
+ * tipos de datos sin usar filter
+ */
+
+//al tener métodos con los mismos nombres en val_normal.php
+//y val_filter.php, el namespace permite identificarlos
 namespace VALNORMAL;
 
-use LengthException;
-
 /**
- * Undocumented function
+ * Valida que un número entero se encuentre dentro de un rango.
  *
- * @param integer $var
- * @param integer $min
- * @param integer $max
- * @param integer $defecto
- * @return boolean
+ * @param int $var Variable a validar. Se modifica por referencia.
+ * @param int $min Valor mínimo permitido.
+ * @param int $max Valor máximo permitido.
+ * @param int $defecto Valor asignado a la variable si la validación falla.
+ * @return bool True si el valor es válido; false en caso contrario.
  */
 function validaEntero(int &$var, int $min, int $max, int $defecto): bool
 {
-
-    //falso si no está entre min y max
     if ($var < $min || $var > $max) {
         $var = $defecto;
         return false;
@@ -26,18 +29,16 @@ function validaEntero(int &$var, int $min, int $max, int $defecto): bool
 }
 
 /**
- * Undocumented function
+ * Valida que un número real se encuentre dentro de un rango.
  *
- * @param float $var
- * @param float $min
- * @param float $max
- * @param float $defecto
- * @return boolean
+ * @param float $var Variable a validar. Se modifica por referencia.
+ * @param float $min Valor mínimo permitido.
+ * @param float $max Valor máximo permitido.
+ * @param float $defecto Valor asignado a la variable si la validación falla.
+ * @return bool True si el valor es válido; false en caso contrario.
  */
 function validaReal(float &$var, float $min, float $max, float $defecto): bool
 {
-
-    //falso si no está entre min y max
     if ($var < $min || $var > $max) {
         $var = $defecto;
         return false;
@@ -47,16 +48,19 @@ function validaReal(float &$var, float $min, float $max, float $defecto): bool
 }
 
 /**
- * Undocumented function
+ * Valida una fecha en formato dd/mm/aaaa.
  *
- * @param string $var
- * @param string $defecto
- * @return boolean
+ * Si la fecha es válida, la sanea utilizando el formato
+ * d/m/Y y la devuelve en la variable recibida.
+ *
+ * @param string $var Fecha a validar.
+ * @param string $defecto Fecha por defecto en caso de error.
+ * @return bool True si la fecha es válida; false en caso contrario.
  */
 function validaFecha(string &$var, string $defecto): bool
 {
-
     $var = trim($var);
+
     if ($fecha = \DateTime::createFromFormat('d/m/Y', $var)) {
         $var = $fecha->format("d/m/Y");
         return true;
@@ -67,17 +71,22 @@ function validaFecha(string &$var, string $defecto): bool
 }
 
 /**
- * Undocumented function
+ * Valida una hora en formato hh:mm:ss.
  *
- * @param string $var
- * @param string $defecto
- * @return boolean
+ * Permite introducir horas sin ceros a la izquierda
+ * (por ejemplo 0:5:1) y las transforma al formato
+ * correcto (00:05:01).
+ *
+ * @param string $var Hora a validar.
+ * @param string $defecto Hora por defecto en caso de error.
+ * @return bool True si la hora es válida; false en caso contrario.
  */
 function validaHora(string &$var, string $defecto): bool
 {
-
     $var = trim($var);
+
     $partes = explode(":", $var);
+
     if (count($partes) === 3) {
         $var = str_pad($partes[0], 2, '0', STR_PAD_LEFT) . ':' .
             str_pad($partes[1], 2, '0', STR_PAD_LEFT) . ':' .
@@ -94,16 +103,17 @@ function validaHora(string &$var, string $defecto): bool
 }
 
 /**
- * Undocumented function
+ * Valida una dirección de correo electrónico mediante
+ * una expresión regular.
  *
- * @param string $var
- * @param string $defecto
- * @return boolean
+ * @param string $var Email a validar.
+ * @param string $defecto Valor por defecto en caso de error.
+ * @return bool True si el email es válido; false en caso contrario.
  */
 function validaEmail(string &$var, string $defecto): bool
 {
-
     $var = trim($var);
+
     if (preg_match("/^[\w]+@[\w.]+\.[a-z]{2,3}$/", $var) === 1)
         return true;
 
@@ -112,17 +122,17 @@ function validaEmail(string &$var, string $defecto): bool
 }
 
 /**
- * Undocumented function
+ * Valida que una cadena no supere una longitud máxima.
  *
- * @param string $var
- * @param integer $longitud
- * @param string $defecto
- * @return boolean
+ * @param string $var Cadena a validar.
+ * @param int $longitud Longitud máxima permitida.
+ * @param string $defecto Valor por defecto en caso de error.
+ * @return bool True si la longitud es válida; false en caso contrario.
  */
 function validaCadena(string &$var, int $longitud, string $defecto): bool
 {
-
     $var = trim($var);
+
     if (mb_strlen($var) <= $longitud)
         return true;
 
@@ -131,17 +141,17 @@ function validaCadena(string &$var, int $longitud, string $defecto): bool
 }
 
 /**
- * Undocumented function
+ * Valida una cadena utilizando una expresión regular.
  *
- * @param string $var
- * @param string $expresion
- * @param string $defecto
- * @return boolean
+ * @param string $var Cadena a validar.
+ * @param string $expresion Expresión regular utilizada para la validación.
+ * @param string $defecto Valor por defecto en caso de error.
+ * @return bool True si la cadena cumple la expresión; false en caso contrario.
  */
 function validaExpresion(string &$var, string $expresion, string $defecto): bool
 {
-
     $var = trim($var);
+
     if (preg_match($expresion, $var) === 1)
         return true;
 
@@ -150,20 +160,25 @@ function validaExpresion(string &$var, string $expresion, string $defecto): bool
 }
 
 /**
- * Undocumented function
+ * Comprueba si un valor pertenece a un conjunto
+ * de valores permitidos.
  *
- * @param mixed $var
- * @param array $posibles
- * @param integer $tipo
- * @return boolean
+ * Puede realizar la comprobación sobre los valores
+ * de un array o sobre sus claves.
+ *
+ * @param mixed $var Valor a buscar.
+ * @param array $posibles Array de valores permitidos.
+ * @param int $tipo
+ *      1 -> buscar en los valores del array.
+ *      2 -> buscar en las claves del array.
+ * @return bool True si se encuentra el valor; false en caso contrario.
  */
 function validaRango(mixed $var, array $posibles, int $tipo = 1): bool
 {
-
-    if($tipo===2)
-        $array=array_keys($posibles);
+    if ($tipo === 2)
+        $array = array_keys($posibles);
     else
-        $array=$posibles;
+        $array = $posibles;
 
     foreach ($array as $elem) {
         if ($elem === $var)

@@ -207,7 +207,7 @@ function cuerpo()
 
     $variable = "Héctor";
     echo "<br>Está {$variable} en el array: " .
-        (\VALFILTER\validaRango($variable, $array) ? "si" : "no"); //tercer parámetro=1 por defecto
+        (\VALFILTER\validaRango($variable, $array) ? "si" : "no");
 
     $variable = "alumno3";
     echo "<br><br>Está el alumno con clave {$variable} en el array: " .
@@ -216,11 +216,4 @@ function cuerpo()
     $variable = "alumno4";
     echo "<br>Está el alumno con clave {$variable} en el array: " .
         (\VALFILTER\validaRango($variable, $array, 2) ? "si" : "no");
-}
-
-function mostrarValidacion(mixed $variable, string $cadena, bool $resul)
-{
-    return "<br>Valido " . $cadena . " {$variable}: " .
-        ($resul ? "válido" : "inválido") .
-        ", valor actual->" . $variable;
 }
