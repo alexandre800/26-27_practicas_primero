@@ -33,5 +33,6 @@ function cuerpo(){
     <a href="clases.php">clases</a>
     <a href="pagformulario.php">formulario</a>
     <a href="cargaPagina.php">carga página</a>
+    <a href="pruebaFicheros.php">prueba ficheros</a>
 <?php
 }
