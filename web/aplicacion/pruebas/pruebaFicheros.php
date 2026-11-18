@@ -7,10 +7,15 @@ include_once(dirname(__FILE__) . "/../../cabecera.php");
 $barra = [
     [
         "TEXTO" => "inicio",
-        "LINK" => "/index.php",
+        "ENLACE" => "/index.php"
     ],
     [
-        "TEXTO" => "prue ficheros"
+        "TEXTO" => "pruebas",
+        "ENLACE" => "index.php"
+    ],
+    [
+        "TEXTO" => "prue ficheros",
+        "ENLACE" => "pruebaFicheros.php"
     ],
 ];
 
@@ -42,7 +47,7 @@ if (isset($_POST["descargar"]))
         $nombreSalida="datossssss.pdf";
         header('Content-Type:'.'application/pdf');
         header('Content-Disposition:attachment;filename="'.$nombreSalida.'"');
-        $ruta = RUTABASE . "/ficheros/ej2.pdf";
+        $ruta = RUTABASE . "/ficheros/asd.pdf";
         echo file_get_contents($ruta);
         //echo "esto es lo que va en la respuesta".PHP_EOL;
         //echo "y por tanto en el fichero";
@@ -140,9 +145,8 @@ function cuerpo(array $errores)
     <br><br>
     <form enctype="multipart/form-data" action="" method="POST">
         <!--MAX_FILE_SIZE debe preceder al campo de entrada de archivo-->
-        <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
-        <!-- El nombre del elemento de entrada determina el nombre en el array
-$_FILES -->
+        <input type="hidden" name="MAX_FILE_SIZE" value="5000000000000" />
+        <!-- El nombre del elemento de entrada determina el nombre en el array $_FILES -->
         Enviar este archivo:
         <input name="archivo" type="file" /><br>
         <input type="text" name="nombre"/><br><br>
@@ -191,7 +195,9 @@ function escribirAFichero(string $nombre, ?array $datos = null): bool
         //se escribe en el fichero una linea
         fputs($fic, $linea);
     }
+
     //se cierra el fichero
+    fclose($fic);
     return true;
 }
 

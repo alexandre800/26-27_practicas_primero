@@ -3,7 +3,7 @@
 class Punto{
 
     //constante pública de clase COLORES
-    public static const COLORES = [
+    public const COLORES = [
         "black"=>["nombre"=>"negro", "rgb" =>[0,0,0]],
         "red"=>["nombre"=>"rojo", "rgb" =>[255,0,0]],
         "blue"=>["nombre"=>"azul", "rgb" =>[0,0,255]],
@@ -11,7 +11,7 @@ class Punto{
     ];
 
     //constante pública de clase GROSORES
-    public static const GROSORES = [
+    public const GROSORES = [
         1=>"fino",
         2=>"medio",
         3=>"grueso"
