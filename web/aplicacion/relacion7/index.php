@@ -8,7 +8,6 @@ $barra = [
 ];
 
 //inicializaciones
-$arrayPuntos = [];
 $punto = new Punto(0, 0, "black", 1);
 $errores = [];
 
@@ -42,7 +41,8 @@ if (isset($_POST["cr"])) {
     if (isset($_POST["color"]))
         $color = $_POST["color"];
 
-    $punto->setColor($color);
+    if(!$punto->setColor($color))
+        $errores["color"][] = "Se debe elegir un color";
 
     //grosor
     $grosor = 0;
@@ -67,25 +67,16 @@ finCuerpo();
 // **********************************************************
 function cabecera() {}
 
-function cuerpo($arrayPuntos, $errores)
+function cuerpo(array $arrayPuntos, array $errores)
 {
-    formulario($errores);
-    //echo implode(",", $arrayPuntos);
+    formulario($arrayPuntos, $errores);
 }
 
-function formulario($errores)
+function formulario(array $arrayPuntos, array $errores)
 {
-    // if ($errores) { //mostrar los errores
-    //     echo "<div class='error'>";
-    //     foreach ($errores as $clave => $valor) {
-    //         foreach ($valor as $error)
-    //             echo "$clave => $error<br>" . PHP_EOL;
-    //     }
-    //     echo "</div>";
-    // }
 ?>
 
-    <form action="index.php" method="post">
+    <form action="" method="post">
         X: <input type="number" name="x" value="0">
         <?php
         if (isset($errores["X"])) {
@@ -100,11 +91,17 @@ function formulario($errores)
         ?><br><br>
 
         Color: <select name="color">
+            <option value="0">-Seleccione color-</option>
             <option value="black">Negro</option>
             <option value="red">Rojo</option>
             <option value="blue">Azul</option>
             <option value="green">Verde</option>
-        </select><br><br>
+        </select>
+        <?php
+        if (isset($errores["color"])) {
+            echo "<span style='color: red'>{$errores["color"][0]}</span>";
+        }
+        ?><br><br>
 
         Grosor:<br><input type="radio" name="grosor" value=1>Fino
         <input type="radio" name="grosor" value=2>Medio
@@ -118,6 +115,17 @@ function formulario($errores)
         <input type="submit" name="cr" value="Crear punto">
     </form>
 
+    <textarea cols="40">
+        <?php 
+        if(!empty($arrayPuntos)){
+            foreach($arrayPuntos as $punto){
+                echo "X: ".$punto->getX().", Y: ".$punto->getY().
+                ", color: ".$punto->getColor().", grosor: ".$punto->getGrosor();
+            }
+        }
+        ?>
+    </textarea>
+    <img src="" alt="">
 
 <?php
 }

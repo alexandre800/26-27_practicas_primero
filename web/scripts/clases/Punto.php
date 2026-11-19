@@ -76,6 +76,7 @@ class Punto{
         return false;
     }
     public function setColor(string $color): bool{
+        // if(array_keys(COLORES))
         if(validaExpresion($color, "/[black|red|green|blue]/", "red")){
             $this->_color=$color;
             return true;
