@@ -52,32 +52,24 @@ $errores = [];
 if (isset($_POST["cr"])) {
 
     $x = $_POST["x"] ?? 0;
-
     if (validaEntero($x, 0, 500, 0))
         $punto->setX($x);
     else
-        $errores["X"][] =
-            "Debe ser un entero entre 0 y 500";
+        $errores["X"][] = "Debe ser un entero entre 0 y 500";
 
     $y = $_POST["y"] ?? 0;
-
     if (validaEntero($y, 0, 500, 0))
         $punto->setY($y);
     else
-        $errores["Y"][] =
-            "Debe ser un entero entre 0 y 500";
+        $errores["Y"][] = "Debe ser un entero entre 0 y 500";
 
     $color = $_POST["color"] ?? "";
-
     if (!$punto->setColor($color))
-        $errores["color"][] =
-            "Debe elegir un color";
+        $errores["color"][] = "Debe elegir un color";
 
-    $grosor = $_POST["grosor"] ?? 0;
-
+    $grosor = $_POST["grosor"] ?? "";
     if (!$punto->setGrosor($grosor))
-        $errores["grosor"][] =
-            "Debe elegir un grosor";
+        $errores["grosor"][] = "Debe elegir un grosor";
 
     //si no hay errores, se guarda el punto en el array
     //y en el fichero, y se genera la imagen
@@ -85,16 +77,17 @@ if (isset($_POST["cr"])) {
 
         $arrayPuntos[] = $punto;
 
-        guardarPuntos(
-            $arrayPuntos,
-            $ficheroPuntos
-        );
+        guardarPuntos($arrayPuntos, $ficheroPuntos);
 
-        generarImagen(
-            $arrayPuntos,
-            $nombreImagenFisica
-        );
+        generarImagen($arrayPuntos, $nombreImagenFisica);
     }
+}
+
+if(isset($_POST["borrar"])){
+
+    $puntoBorrar = $_POST["borrarSelect"] ?? 0;
+    array_splice($arrayPuntos, $puntoBorrar);
+
 }
 
 //vista
@@ -159,14 +152,27 @@ function formulario(array $arrayPuntos, array $errores, string $nombreImagen)
         <input type="submit" name="cr" value="Crear punto">
 
     </form>
+    <br>
+    <form action="" method="post">
+        <select name="borrarSelect">
+            <?php
+            foreach($arrayPuntos as $clave=>$punto){
+                echo "<option value='{$clave}'>".($clave+1)."-> X: " . $punto->getX() . "; " .
+                "Y: " . $punto->getY() . "; " .
+                "Color: " . $punto->getColor() . "; " .
+                "Grosor: " . $punto->getGrosor()."</option>";
+            }
+            ?>
+        </select>
+        <input type="submit" name="borrar" value="Borrar punto">
+    </form>
 
     <br>
 
     <textarea rows="10" cols="60" readonly><?php
         foreach ($arrayPuntos as $punto) {
 
-            echo
-            "Coordenada X: " . $punto->getX() . "; " .
+            echo "Coordenada X: " . $punto->getX() . "; " .
                 "Coordenada Y: " . $punto->getY() . "; " .
                 "Color: " . $punto->getColor() . "; " .
                 "Grosor: " . $punto->getGrosor() .
@@ -175,7 +181,7 @@ function formulario(array $arrayPuntos, array $errores, string $nombreImagen)
         ?>
     </textarea><br><br>
 
-    <img src="<?= $nombreImagen ?>?<?= time() ?>" alt="Puntos">
+    <img src="<?= $nombreImagen ?>" alt="Puntos">
 
 <?php
 }
@@ -220,9 +226,7 @@ function generarImagen(array $arrayPuntos, string $nombreImagen): void {
 
 function obtenerNavegador(): string
 {
-    $ua = strtolower(
-        $_SERVER["HTTP_USER_AGENT"]
-    );
+    $ua = strtolower($_SERVER["HTTP_USER_AGENT"]);
 
     if (str_contains($ua, "edg"))
         return "edge";
