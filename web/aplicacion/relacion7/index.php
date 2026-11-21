@@ -8,17 +8,8 @@ $barra = [
     ["TEXTO" => "Relación 7", "ENLACE" => "index.php"]
 ];
 
-//obtener ip y navegador
-$ip = str_replace(".", "_", $_SERVER["REMOTE_ADDR"]);
-$navegador = obtenerNavegador();
-//obtener nombre imagen
-$nombreImagenFisica = "../../imagenes/puntos/{$ip}_{$navegador}.jpg";
-$nombreImagenWeb = "../../imagenes/puntos/{$ip}_{$navegador}.jpg";
 
-//obtener fichero con los puntos
-$ficheroPuntos = "../../ficheros/puntos_{$ip}_{$navegador}.dat";
 //cargar puntos del fichero
-$arrayPuntos = [];
 if (!file_exists($ficheroPuntos)) {
     touch($ficheroPuntos);
 }
@@ -41,8 +32,8 @@ foreach ($lineas as $linea) {
 }
 
 //crear imagen si no existe
-if (!file_exists($nombreImagenFisica)) {
-    generarImagen($arrayPuntos, $nombreImagenFisica);
+if (!file_exists($nombreImagen)) {
+    generarImagen($arrayPuntos, $nombreImagen);
 }
 
 $punto = new Punto(0, 0, "black", 1);
@@ -76,17 +67,18 @@ if (isset($_POST["cr"])) {
     if (empty($errores)) {
 
         $arrayPuntos[] = $punto;
-
         guardarPuntos($arrayPuntos, $ficheroPuntos);
-
-        generarImagen($arrayPuntos, $nombreImagenFisica);
+        generarImagen($arrayPuntos, $nombreImagen);
     }
 }
 
 if(isset($_POST["borrar"])){
 
-    $puntoBorrar = $_POST["borrarSelect"] ?? 0;
-    array_splice($arrayPuntos, $puntoBorrar);
+    $puntoBorrar = $_POST["borrarSelect"];
+    array_splice($arrayPuntos, $puntoBorrar, 1);
+
+    guardarPuntos($arrayPuntos, $ficheroPuntos);
+    generarImagen($arrayPuntos, $nombreImagen);
 
 }
 
@@ -95,7 +87,7 @@ inicioCabecera("RELACION 7");
 cabecera();
 finCabecera();
 inicioCuerpo("Relación 7", $barra);
-cuerpo($arrayPuntos, $errores, $nombreImagenWeb);
+cuerpo($arrayPuntos, $errores, $nombreImagen);
 finCuerpo();
 
 function cabecera() {}
@@ -153,7 +145,7 @@ function formulario(array $arrayPuntos, array $errores, string $nombreImagen)
 
     </form>
     <br>
-    <form action="" method="post">
+    <form action="index.php" method="post">
         <select name="borrarSelect">
             <?php
             foreach($arrayPuntos as $clave=>$punto){
@@ -166,9 +158,11 @@ function formulario(array $arrayPuntos, array $errores, string $nombreImagen)
         </select>
         <input type="submit" name="borrar" value="Borrar punto">
     </form>
-
     <br>
-
+    <form action="imagen.php" method="post">
+        <input type="submit" name="descargar" value="Descargar imagen">
+    </form>
+    <br>
     <textarea rows="10" cols="60" readonly><?php
         foreach ($arrayPuntos as $punto) {
 
@@ -181,7 +175,9 @@ function formulario(array $arrayPuntos, array $errores, string $nombreImagen)
         ?>
     </textarea><br><br>
 
-    <img src="<?= $nombreImagen ?>" alt="Puntos">
+    <!--hace falta poner el tiempo para que no muestre una versión antigua de la imagen
+    y la muestre siempre actualizada-->
+    <img src="<?= $nombreImagen . '?' . time() ?>" alt="Puntos">
 
 <?php
 }
@@ -199,7 +195,13 @@ function guardarPuntos(array $arrayPuntos, string $fichero): void {
     file_put_contents($fichero, $contenido);
 }
 
-
+/**
+ * Undocumented function
+ *
+ * @param array $arrayPuntos
+ * @param string $nombreImagen
+ * @return void
+ */
 function generarImagen(array $arrayPuntos, string $nombreImagen): void {
 
     $img = imagecreatetruecolor(500, 500);
@@ -222,20 +224,4 @@ function generarImagen(array $arrayPuntos, string $nombreImagen): void {
     }
 
     imagejpeg($img, $nombreImagen);
-}
-
-function obtenerNavegador(): string
-{
-    $ua = strtolower($_SERVER["HTTP_USER_AGENT"]);
-
-    if (str_contains($ua, "edg"))
-        return "edge";
-
-    if (str_contains($ua, "chrome"))
-        return "chrome";
-
-    if (str_contains($ua, "firefox"))
-        return "firefox";
-
-    return "otro";
 }
